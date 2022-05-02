@@ -1,3 +1,4 @@
+
 # Using LinuxCNC version:  2.8
 #
 
@@ -26,8 +27,8 @@ addf [HMOT](CARD0).write      servo-thread
 # external output signals
 
 # Enable 0
+setp [HMOT](CARD0).gpio.001.invert_output FALSE
 setp [HMOT](CARD0).gpio.001.is_output     TRUE
-setp [HMOT](CARD0).gpio.001.invert_output TRUE
 # Common enable for all steppers
 net x-enable => [HMOT](CARD0).gpio.001.out
 
@@ -36,7 +37,7 @@ setp [HMOT](CARD0).gpio.007.invert_output     FALSE
 setp [HMOT](CARD0).gpio.007.is_output         TRUE
 
 # Enable 1
-setp [HMOT](CARD0).gpio.020.invert_output     TRUE
+setp [HMOT](CARD0).gpio.020.invert_output     FALSE
 setp [HMOT](CARD0).gpio.020.is_output         TRUE
 
 # Relay 1
@@ -194,27 +195,27 @@ net max-y1      => joint.1.pos-lim-sw-in
 
 # Step Gen signals/setup for tandem axis
 
-setp   [HMOT](CARD0).stepgen.03.step_type        0
-setp   [HMOT](CARD0).stepgen.03.control-type     0
-setp   [HMOT](CARD0).stepgen.03.dirsetup        [JOINT_2]DIRSETUP
-setp   [HMOT](CARD0).stepgen.03.dirhold         [JOINT_2]DIRHOLD
-setp   [HMOT](CARD0).stepgen.03.steplen         [JOINT_2]STEPLEN
-setp   [HMOT](CARD0).stepgen.03.stepspace       [JOINT_2]STEPSPACE
-setp   [HMOT](CARD0).stepgen.03.position-scale  [JOINT_2]STEP_SCALE
-setp   [HMOT](CARD0).stepgen.03.maxaccel        [JOINT_2]STEPGEN_MAXACCEL
-setp   [HMOT](CARD0).stepgen.03.maxvel          [JOINT_2]STEPGEN_MAXVEL
-setp   [HMOT](CARD0).stepgen.03.step.invert_output 1
+setp   [HMOT](CARD0).stepgen.02.step_type        0
+setp   [HMOT](CARD0).stepgen.02.control-type     0
+setp   [HMOT](CARD0).stepgen.02.dirsetup        [JOINT_2]DIRSETUP
+setp   [HMOT](CARD0).stepgen.02.dirhold         [JOINT_2]DIRHOLD
+setp   [HMOT](CARD0).stepgen.02.steplen         [JOINT_2]STEPLEN
+setp   [HMOT](CARD0).stepgen.02.stepspace       [JOINT_2]STEPSPACE
+setp   [HMOT](CARD0).stepgen.02.position-scale  [JOINT_2]STEP_SCALE
+setp   [HMOT](CARD0).stepgen.02.maxaccel        [JOINT_2]STEPGEN_MAXACCEL
+setp   [HMOT](CARD0).stepgen.02.maxvel          [JOINT_2]STEPGEN_MAXVEL
+setp   [HMOT](CARD0).stepgen.02.step.invert_output 1
 
 # ---closedloop stepper signals---
 
 net y2-pos-cmd    <= joint.2.motor-pos-cmd
 net y2-vel-cmd    <= joint.2.vel-cmd
-#net y2-output     <= [HMOT](CARD0).stepgen.03.velocity-cmd
-net y2-pos-cmd     <= [HMOT](CARD0).stepgen.03.position-cmd
-net y2-pos-fb     <= [HMOT](CARD0).stepgen.03.position-fb
+#net y2-output     <= [HMOT](CARD0).stepgen.02.velocity-cmd
+net y2-pos-cmd     <= [HMOT](CARD0).stepgen.02.position-cmd
+net y2-pos-fb     <= [HMOT](CARD0).stepgen.02.position-fb
 net y2-pos-fb     => joint.2.motor-pos-fb
 net y2-enable     <= joint.2.amp-enable-out
-net y2-enable     => [HMOT](CARD0).stepgen.03.enable
+net y2-enable     => [HMOT](CARD0).stepgen.02.enable
 
 # ---setup home / limit switch signals---
 
@@ -248,28 +249,28 @@ net min-home-y2   => joint.2.neg-lim-sw-in
 
 # Step Gen signals/setup
 
-setp   [HMOT](CARD0).stepgen.02.step_type        0
-setp   [HMOT](CARD0).stepgen.02.control-type     0
-setp   [HMOT](CARD0).stepgen.02.dirsetup        [JOINT_3]DIRSETUP
-setp   [HMOT](CARD0).stepgen.02.dirhold         [JOINT_3]DIRHOLD
-setp   [HMOT](CARD0).stepgen.02.steplen         [JOINT_3]STEPLEN
-setp   [HMOT](CARD0).stepgen.02.stepspace       [JOINT_3]STEPSPACE
-setp   [HMOT](CARD0).stepgen.02.position-scale  [JOINT_3]STEP_SCALE
-setp   [HMOT](CARD0).stepgen.02.maxaccel        [JOINT_3]STEPGEN_MAXACCEL
-setp   [HMOT](CARD0).stepgen.02.maxvel          [JOINT_3]STEPGEN_MAXVEL
-setp   [HMOT](CARD0).stepgen.02.direction.invert_output 1
-setp   [HMOT](CARD0).stepgen.02.step.invert_output 1
+setp   [HMOT](CARD0).stepgen.03.step_type        0
+setp   [HMOT](CARD0).stepgen.03.control-type     0
+setp   [HMOT](CARD0).stepgen.03.dirsetup        [JOINT_3]DIRSETUP
+setp   [HMOT](CARD0).stepgen.03.dirhold         [JOINT_3]DIRHOLD
+setp   [HMOT](CARD0).stepgen.03.steplen         [JOINT_3]STEPLEN
+setp   [HMOT](CARD0).stepgen.03.stepspace       [JOINT_3]STEPSPACE
+setp   [HMOT](CARD0).stepgen.03.position-scale  [JOINT_3]STEP_SCALE
+setp   [HMOT](CARD0).stepgen.03.maxaccel        [JOINT_3]STEPGEN_MAXACCEL
+setp   [HMOT](CARD0).stepgen.03.maxvel          [JOINT_3]STEPGEN_MAXVEL
+setp   [HMOT](CARD0).stepgen.03.direction.invert_output 1
+setp   [HMOT](CARD0).stepgen.03.step.invert_output 1
 
 # ---closedloop stepper signals---
 
 net z-pos-cmd    <= joint.3.motor-pos-cmd
 net z-vel-cmd    <= joint.3.vel-cmd
-#net z-output     <= [HMOT](CARD0).stepgen.02.velocity-cmd
-net z-pos-cmd     <= [HMOT](CARD0).stepgen.02.position-cmd
-net z-pos-fb     <= [HMOT](CARD0).stepgen.02.position-fb
+#net z-output     <= [HMOT](CARD0).stepgen.03.velocity-cmd
+net z-pos-cmd     <= [HMOT](CARD0).stepgen.03.position-cmd
+net z-pos-fb     <= [HMOT](CARD0).stepgen.03.position-fb
 net z-pos-fb     => joint.3.motor-pos-fb
 net z-enable     <= joint.3.amp-enable-out
-net z-enable     => [HMOT](CARD0).stepgen.02.enable
+net z-enable     => [HMOT](CARD0).stepgen.03.enable
 
 # ---setup home / limit switch signals---
 
