@@ -3,7 +3,7 @@
 #
 
 loadrt [KINS]KINEMATICS
-loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
+loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
 loadrt hostmot2
 loadrt hm2_rpspi config="num_encoders=2 num_pwmgens=2 num_stepgens=4 num_leds=4 num_uarts=2" 
 setp   [HMOT](CARD0).pwmgen.pwm_frequency 20000
@@ -11,6 +11,9 @@ setp   [HMOT](CARD0).pwmgen.pdm_frequency 6000000
 #setp   [HMOT](CARD0).watchdog.timeout_ns 5000000
 #loadrt pid names=pid.x,pid.y1,pid.y2,pid.z
 loadrt estop_latch
+loadrt debounce cfg=2
+
+addf debounce.0               base-thread
 
 addf [HMOT](CARD0).read       servo-thread
 addf motion-command-handler   servo-thread
@@ -56,6 +59,10 @@ net max-home-z  <=  [HMOT](CARD0).gpio.022.in_not
 
 # Tool Probe
 net probe-in  <=  [HMOT](CARD0).gpio.032.in
+
+setp debounce.0.delay 20
+net probe-in => debounce.0.0.in
+net probe-filt <= debounce.0.0.out
 
 #*******************
 #  AXIS X JOINT 0
@@ -346,7 +353,7 @@ net coolant-flood     <=  iocontrol.0.coolant-flood
 
 #  ---probe signal---
 
-net probe-in     =>  motion.probe-input
+net probe-filt     =>  motion.probe-input
 
 #  ---motion control signals---
 
