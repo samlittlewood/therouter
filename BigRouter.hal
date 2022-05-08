@@ -60,7 +60,7 @@ net max-home-z  <=  [HMOT](CARD0).gpio.022.in_not
 # Tool Probe
 net probe-in  <=  [HMOT](CARD0).gpio.032.in
 
-setp debounce.0.delay 20
+setp debounce.0.delay 50
 net probe-in => debounce.0.0.in
 net probe-filt <= debounce.0.0.out
 
