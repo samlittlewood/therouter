@@ -12,8 +12,10 @@ setp   [HMOT](CARD0).pwmgen.pdm_frequency 6000000
 #loadrt pid names=pid.x,pid.y1,pid.y2,pid.z
 loadrt estop_latch
 loadrt debounce cfg=2
+loadrt or2 count=1
 
 addf debounce.0               base-thread
+addf or2.0 		      base-thread
 
 addf [HMOT](CARD0).read       servo-thread
 addf motion-command-handler   servo-thread
@@ -57,12 +59,20 @@ net max-y1      <=  [HMOT](CARD0).gpio.014.in_not
 net min-home-y2 <=  [HMOT](CARD0).gpio.013.in_not
 net max-home-z  <=  [HMOT](CARD0).gpio.022.in_not
 
-# Tool Probe
+# Probes
 net probe-in  <=  [HMOT](CARD0).gpio.032.in
+net tool-in  <=  [HMOT](CARD0).gpio.034.in
 
 setp debounce.0.delay 50
 net probe-in => debounce.0.0.in
 net probe-filt <= debounce.0.0.out
+
+net tool-in => debounce.0.1.in
+net tool-filt <= debounce.0.1.out
+
+net probe-filt => or2.0.in0
+net tool-filt => or2.0.in1
+net tool-probe-filt <= or2.0.out
 
 #*******************
 #  AXIS X JOINT 0
@@ -353,7 +363,7 @@ net coolant-flood     <=  iocontrol.0.coolant-flood
 
 #  ---probe signal---
 
-net probe-filt     =>  motion.probe-input
+net tool-probe-filt     =>  motion.probe-input
 
 #  ---motion control signals---
 
