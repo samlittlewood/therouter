@@ -1,0 +1,7 @@
+# PostGUI HAL setup
+
+# Main screen spindle connections
+#
+net spindle-speed-fb => gmoccapy.spindle_feedback_bar
+net spindle-at-speed => gmoccapy.spindle_at_speed_led
+

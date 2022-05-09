@@ -1,7 +1,5 @@
-# Include your custom HAL commands here
-# This file will not be overwritten when you run PNCconf again
-
 # Spindle VFD via RS485
+#
 loadusr -Wn vfd hy_vfd -n vfd -d /dev/ttyUSB0 -r 9600
 net spindle-vel-cmd-rpm-abs		=> vfd.speed-command
 net spindle-cw				=> vfd.spindle-forward
@@ -11,7 +9,3 @@ net spindle-at-speed			<= vfd.spindle-at-speed
 net spindle-speed-fb                    => vfd.spindle-speed-fb
 
 setp vfd.enable 1
-
-# For debugging
-# loadusr halshow
-

@@ -1,0 +1,23 @@
+# Spindle panel HAL: setup
+#
+net spindlep-rpm <= vfd.Rott => spindle-panel.spindle-speed
+net spindlep-amps <= vfd.OutA => spindle-panel.amp-meter
+net spindlep-max-freq <= vfd.max-freq => spindle-panel.max-freq
+net spindlep-freq-lower <= vfd.freq-lower-limit => spindle-panel.freq-lower-limit
+net spindlep-motor-voltage <= vfd.rated-motor-voltage => spindle-panel.rated-motor-voltage
+net spindlep-motor-current <= vfd.rated-motor-current => spindle-panel.rated-motor-current
+net spindlep-motor-rev <= vfd.rated-motor-rev => spindle-panel.rated-motor-rev
+net spindlep-modbus-ok <= vfd.hycomm-ok => spindle-panel.modbus-ok
+
+#net spindlep-base-freq <= vfd.base-freq => spindle-panel.base-freq
+#net spindlep-motor-poles <= vfd.motor-pole-number => spindle-panel.motor-pole-number
+#net spindlep-freq-cmd <= vfd.frequency-command => spindle-panel.frequency-command
+
+net spindlep-cnst-run <= vfd.CNST-run => spindle-panel.CNST-run
+net spindlep-cnst-jog <= vfd.CNST-jog => spindle-panel.CNST-jog
+net spindlep-cnst-command-rf <= vfd.CNST-command-rf => spindle-panel.CNST-command-rf
+net spindlep-cnst-runnning <= vfd.CNST-running => spindle-panel.CNST-running
+net spindlep-cnst-jogging <= vfd.CNST-jogging => spindle-panel.CNST-jogging
+net spindlep-cnst-running-rf <= vfd.CNST-running-rf => spindle-panel.CNST-running-rf
+net spindlep-cnst-braking <= vfd.CNST-bracking => spindle-panel.CNST-bracking
+net spindlep-cnst-track-start <= vfd.CNST-track-start => spindle-panel.CNST-track-start

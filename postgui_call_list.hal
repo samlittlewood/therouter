@@ -1,4 +1,0 @@
-# These files are loaded post GUI, in the order they appear
-
-source probe_postgui.hal
-source spindle_postgui.hal
