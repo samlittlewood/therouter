@@ -1,0 +1,5 @@
+*.pref
+*.pyc
+*.bak
+autosave.halscope
+linuxcnc.var
