@@ -28,7 +28,6 @@ addf motion-controller        servo-thread
 #addf pid.s.do-pid-calcs      servo-thread
 addf [HMOT](CARD0).write      servo-thread
 
-
 # external output signals
 
 # Enable 0

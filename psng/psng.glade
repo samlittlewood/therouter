@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="2.16"/>
   <!-- interface-requires gladevcp 0.0 -->
+  <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
   <object class="GtkAdjustment" id="ad_probe_vel">
     <property name="upper">1000</property>
@@ -20,8 +20,8 @@
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adj_offs_angle">
-    <property name="lower">-359.9999</property>
-    <property name="upper">359.9999</property>
+    <property name="lower">-359.99990000000003</property>
+    <property name="upper">359.99990000000003</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
@@ -48,12 +48,6 @@
     <property name="step_increment">0.10000000000000001</property>
     <property name="page_increment">1</property>
   </object>
-  <object class="GtkAdjustment" id="adj_setter_height">
-    <property name="lower">-2000</property>
-    <property name="upper">2000</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
   <object class="GtkAdjustment" id="adj_probe_latch">
     <property name="upper">100</property>
     <property name="step_increment">0.10000000000000001</property>
@@ -66,6 +60,12 @@
   </object>
   <object class="GtkAdjustment" id="adj_search_vel">
     <property name="upper">10000</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adj_setter_height">
+    <property name="lower">-2000</property>
+    <property name="upper">2000</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
@@ -139,7 +139,6 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">Y+</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="yalign">0</property>
                                 <signal name="released" handler="on_yp_released" swapped="no"/>
                                 <child>
@@ -166,7 +165,6 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">Y+X- out</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="xalign">0</property>
                                 <property name="yalign">0</property>
                                 <signal name="released" handler="on_xmyp_released" swapped="no"/>
@@ -195,7 +193,6 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">X+Y- out</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="xalign">1</property>
                                 <property name="yalign">0</property>
                                 <signal name="released" handler="on_xpyp_released" swapped="no"/>
@@ -223,7 +220,6 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">X+</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="xalign">1</property>
                                 <signal name="released" handler="on_xp_released" swapped="no"/>
                                 <child>
@@ -249,7 +245,6 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">X+Y- out</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="xalign">1</property>
                                 <property name="yalign">1</property>
                                 <signal name="released" handler="on_xpym_released" swapped="no"/>
@@ -276,7 +271,6 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">Y-</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="yalign">1</property>
                                 <signal name="released" handler="on_ym_released" swapped="no"/>
                                 <child>
@@ -302,7 +296,6 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">Y-X+ out</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="xalign">0</property>
                                 <property name="yalign">1</property>
                                 <signal name="released" handler="on_xmym_released" swapped="no"/>
@@ -329,7 +322,6 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="xalign">0</property>
                                 <signal name="released" handler="on_xm_released" swapped="no"/>
                                 <child>
@@ -357,7 +349,6 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">Center OUT</property>
-                                <property name="use_action_appearance">False</property>
                                 <signal name="released" handler="on_xy_center_released" swapped="no"/>
                                 <child>
                                   <object class="GtkImage" id="image9">
@@ -773,7 +764,6 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">X+Y- in</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="xalign">1</property>
                                 <property name="yalign">1</property>
                                 <signal name="released" handler="on_xpym1_released" swapped="no"/>
@@ -804,7 +794,6 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">Y-</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="yalign">1</property>
                                 <signal name="released" handler="on_ym_released" swapped="no"/>
                                 <child>
@@ -833,7 +822,6 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">Y-X- in</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="xalign">0</property>
                                 <property name="yalign">1</property>
                                 <signal name="released" handler="on_xmym1_released" swapped="no"/>
@@ -862,7 +850,6 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">X-</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="xalign">0</property>
                                 <signal name="released" handler="on_xm_released" swapped="no"/>
                                 <child>
@@ -889,7 +876,6 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">X-X+Y-Y+ in</property>
-                                <property name="use_action_appearance">False</property>
                                 <signal name="released" handler="on_xy_hole_released" swapped="no"/>
                                 <child>
                                   <object class="GtkImage" id="image35">
@@ -916,7 +902,6 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">X+</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="xalign">1</property>
                                 <signal name="released" handler="on_xp_released" swapped="no"/>
                                 <child>
@@ -945,7 +930,6 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">X+Y+ in</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="xalign">1</property>
                                 <property name="yalign">0</property>
                                 <signal name="released" handler="on_xpyp1_released" swapped="no"/>
@@ -974,7 +958,6 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">Y+</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="yalign">0</property>
                                 <signal name="released" handler="on_yp_released" swapped="no"/>
                                 <child>
@@ -1001,7 +984,6 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="tooltip_text" translatable="yes">Y+X- in</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="xalign">0</property>
                                 <property name="yalign">0</property>
                                 <signal name="released" handler="on_xmyp1_released" swapped="no"/>
@@ -1121,7 +1103,6 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
-                                        <property name="use_action_appearance">False</property>
                                         <property name="image_position">right</property>
                                         <signal name="pressed" handler="on_btn_jog_pressed" swapped="no"/>
                                         <signal name="released" handler="on_btn_jog_released" swapped="no"/>
@@ -1139,7 +1120,6 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
-                                        <property name="use_action_appearance">False</property>
                                         <signal name="pressed" handler="on_btn_jog_pressed" swapped="no"/>
                                         <signal name="released" handler="on_btn_jog_released" swapped="no"/>
                                       </object>
@@ -1156,7 +1136,6 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
-                                        <property name="use_action_appearance">False</property>
                                         <property name="image_position">right</property>
                                         <signal name="pressed" handler="on_btn_jog_pressed" swapped="no"/>
                                         <signal name="released" handler="on_btn_jog_released" swapped="no"/>
@@ -1174,7 +1153,6 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
-                                        <property name="use_action_appearance">False</property>
                                         <property name="image_position">right</property>
                                         <signal name="pressed" handler="on_btn_jog_pressed" swapped="no"/>
                                         <signal name="released" handler="on_btn_jog_released" swapped="no"/>
@@ -1192,7 +1170,6 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
-                                        <property name="use_action_appearance">False</property>
                                         <property name="image_position">right</property>
                                         <signal name="pressed" handler="on_btn_jog_pressed" swapped="no"/>
                                         <signal name="released" handler="on_btn_jog_released" swapped="no"/>
@@ -1210,7 +1187,6 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
-                                        <property name="use_action_appearance">False</property>
                                         <property name="image_position">right</property>
                                         <signal name="pressed" handler="on_btn_jog_pressed" swapped="no"/>
                                         <signal name="released" handler="on_btn_jog_released" swapped="no"/>
@@ -1300,7 +1276,6 @@
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
                                             <property name="tooltip_text" translatable="yes">X+X+</property>
-                                            <property name="use_action_appearance">False</property>
                                             <signal name="released" handler="on_angle_xp_released" swapped="no"/>
                                             <child>
                                               <object class="GtkImage" id="image24">
@@ -1323,7 +1298,6 @@
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
                                             <property name="tooltip_text" translatable="yes">Y+Y+</property>
-                                            <property name="use_action_appearance">False</property>
                                             <signal name="released" handler="on_angle_yp_released" swapped="no"/>
                                             <child>
                                               <object class="GtkImage" id="image40">
@@ -1348,7 +1322,6 @@
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
                                             <property name="tooltip_text" translatable="yes">X-X-</property>
-                                            <property name="use_action_appearance">False</property>
                                             <signal name="released" handler="on_angle_xm_released" swapped="no"/>
                                             <child>
                                               <object class="GtkImage" id="image41">
@@ -1375,7 +1348,6 @@
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
                                             <property name="tooltip_text" translatable="yes">Y-Y-</property>
-                                            <property name="use_action_appearance">False</property>
                                             <signal name="released" handler="on_angle_ym_released" swapped="no"/>
                                             <child>
                                               <object class="GtkImage" id="image42">
@@ -1412,7 +1384,6 @@
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">False</property>
-                                            <property name="use_action_appearance">False</property>
                                             <property name="image_position">bottom</property>
                                             <property name="draw_indicator">True</property>
                                             <signal name="toggled" handler="on_chk_auto_rott_toggled" swapped="no"/>
@@ -1470,7 +1441,6 @@
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="use_action_appearance">False</property>
                                             <signal name="released" handler="on_btn_set_angle_released" swapped="no"/>
                                             <child>
                                               <object class="GtkImage" id="image43">
@@ -1615,7 +1585,6 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
-                                        <property name="use_action_appearance">False</property>
                                         <signal name="released" handler="on_btn_set_x_released" swapped="no"/>
                                         <child>
                                           <object class="GtkImage" id="image11">
@@ -1641,7 +1610,6 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
-                                        <property name="use_action_appearance">False</property>
                                         <signal name="released" handler="on_btn_set_y_released" swapped="no"/>
                                         <child>
                                           <object class="GtkImage" id="image17">
@@ -1667,7 +1635,6 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
-                                        <property name="use_action_appearance">False</property>
                                         <signal name="released" handler="on_btn_set_z_released" swapped="no"/>
                                         <child>
                                           <object class="GtkImage" id="image23">
@@ -1693,7 +1660,6 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
-                                        <property name="use_action_appearance">False</property>
                                         <property name="image_position">bottom</property>
                                         <property name="draw_indicator">True</property>
                                         <signal name="toggled" handler="on_chk_set_zero_toggled" swapped="no"/>
@@ -1755,6 +1721,13 @@
                                     <property name="border_width">2</property>
                                     <property name="n_rows">4</property>
                                     <property name="n_columns">6</property>
+                                    <property name="row_spacing">4</property>
+                                    <child>
+                                      <placeholder/>
+                                    </child>
+                                    <child>
+                                      <placeholder/>
+                                    </child>
                                     <child>
                                       <object class="GtkImage" id="image25">
                                         <property name="width_request">28</property>
@@ -2186,9 +2159,6 @@
                                         <property name="y_options">GTK_SHRINK</property>
                                       </packing>
                                     </child>
-                                    <child>
-                                      <placeholder/>
-                                    </child>
                                   </object>
                                 </child>
                               </object>
@@ -2215,7 +2185,6 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="tooltip_text" translatable="yes">Z-</property>
-                            <property name="use_action_appearance">False</property>
                             <signal name="released" handler="on_btn_probe_table_released" swapped="no"/>
                             <child>
                               <object class="GtkImage" id="image12">
@@ -2265,7 +2234,6 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="tooltip_text" translatable="yes">Tool diam</property>
-                            <property name="use_action_appearance">False</property>
                             <signal name="released" handler="on_btn_tool_dia_released" swapped="no"/>
                             <child>
                               <object class="GtkImage" id="image47">
@@ -2288,7 +2256,6 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="tooltip_text" translatable="yes">Lx out</property>
-                            <property name="use_action_appearance">False</property>
                             <signal name="released" handler="on_lx_out_released" swapped="no"/>
                             <child>
                               <object class="GtkImage" id="image48">
@@ -2311,7 +2278,6 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="tooltip_text" translatable="yes">Ly out</property>
-                            <property name="use_action_appearance">False</property>
                             <signal name="released" handler="on_ly_out_released" swapped="no"/>
                             <child>
                               <object class="GtkImage" id="image49">
@@ -2334,7 +2300,6 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="tooltip_text" translatable="yes">Lx in</property>
-                            <property name="use_action_appearance">False</property>
                             <signal name="released" handler="on_lx_in_released" swapped="no"/>
                             <child>
                               <object class="GtkImage" id="image50">
@@ -2357,7 +2322,6 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="tooltip_text" translatable="yes">Ly in</property>
-                            <property name="use_action_appearance">False</property>
                             <signal name="released" handler="on_ly_in_released" swapped="no"/>
                             <child>
                               <object class="GtkImage" id="image51">
@@ -2401,14 +2365,14 @@
                                     <property name="can_focus">False</property>
                                     <child>
                                       <object class="GtkButton" id="btn_probe_tool_setter">
+                                        <property name="use_action_appearance">False</property>
+                                        <property name="related_action">vcp_action_reload</property>
                                         <property name="width_request">72</property>
                                         <property name="height_request">72</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
                                         <property name="tooltip_text" translatable="yes">TS Height</property>
-                                        <property name="related_action">vcp_action_reload</property>
-                                        <property name="use_action_appearance">False</property>
                                         <signal name="released" handler="on_btn_probe_tool_setter_released" swapped="no"/>
                                         <child>
                                           <object class="GtkImage" id="image45">
@@ -2425,14 +2389,14 @@
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="btn_probe_workpiece">
+                                        <property name="use_action_appearance">False</property>
+                                        <property name="related_action">vcp_action_reload</property>
                                         <property name="width_request">72</property>
                                         <property name="height_request">72</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
                                         <property name="tooltip_text" translatable="yes">Workpiece Height</property>
-                                        <property name="related_action">vcp_action_reload</property>
-                                        <property name="use_action_appearance">False</property>
                                         <signal name="released" handler="on_btn_probe_workpiece_released" swapped="no"/>
                                         <child>
                                           <object class="GtkImage" id="image46">
@@ -2561,7 +2525,6 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="relief">half</property>
                             <property name="image_position">bottom</property>
                             <property name="draw_indicator">True</property>
