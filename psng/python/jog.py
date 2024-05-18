@@ -15,10 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; If not, see <http://www.gnu.org/licenses/>.
 
-import gtk  # base for pygtk widgets and constants
+
 import hal  # base hal class to react to hal signals
 import linuxcnc
-
+from gi.repository import Gtk, Gdk
 from .base import ProbeScreenBase
 
 
@@ -59,9 +59,9 @@ class ProbeScreenJog(ProbeScreenBase):
 
         self.jog_increments = jog_increments
         if len(self.jog_increments) > 5:
-            print(_("**** PROBE SCREEN INFO ****"))
-            print(_("**** To many increments given in INI File for this screen ****"))
-            print(_("**** Only the first 5 will be reachable through this screen ****"))
+            print((_("**** PROBE SCREEN INFO ****")))
+            print((_("**** To many increments given in INI File for this screen ****")))
+            print((_("**** Only the first 5 will be reachable through this screen ****")))
             # we shorten the incrementlist to 5 (first is default = 0)
             self.jog_increments = self.jog_increments[0:5]
 
@@ -71,24 +71,24 @@ class ProbeScreenJog(ProbeScreenBase):
         # One from the released button and one from the pressed button
         # we make a list of the buttons to later add the hardware pins to them
         label = "Cont"
-        rbt0 = gtk.RadioButton(None, label)
+        rbt0 = Gtk.RadioButton(group=None, label=label)
         rbt0.connect("pressed", self.on_increment_changed, 0)
         self.steps.pack_start(rbt0, True, True, 0)
         rbt0.set_property("draw_indicator", False)
         rbt0.show()
-        rbt0.modify_bg(gtk.STATE_ACTIVE, gtk.gdk.color_parse("#FFFF00"))
+        rbt0.modify_bg(Gtk.StateType.ACTIVE, Gdk.color_parse("#FFFF00"))
         rbt0.__name__ = "rbt0"
         self.incr_rbt_list.append(rbt0)
         # the rest of the buttons are now added to the group
         # self.no_increments is set while setting the hal pins with self._check_len_increments
         for item in range(1, len(self.jog_increments)):
             rbt = "rbt%d" % (item)
-            rbt = gtk.RadioButton(rbt0, self.jog_increments[item])
+            rbt = Gtk.RadioButton(group=rbt0, label=self.jog_increments[item])
             rbt.connect("pressed", self.on_increment_changed, self.jog_increments[item])
             self.steps.pack_start(rbt, True, True, 0)
             rbt.set_property("draw_indicator", False)
             rbt.show()
-            rbt.modify_bg(gtk.STATE_ACTIVE, gtk.gdk.color_parse("#FFFF00"))
+            rbt.modify_bg(Gtk.StateType.ACTIVE, Gdk.color_parse("#FFFF00"))
             rbt.__name__ = "rbt%d" % (item)
             self.incr_rbt_list.append(rbt)
         self.active_increment = "rbt0"
@@ -141,7 +141,7 @@ class ProbeScreenJog(ProbeScreenBase):
 
         axisletter = widget.get_label()[0]
         if not axisletter.lower() in "xyzabcuvw":
-            print("unknown axis %s" % axisletter)
+            print(("unknown axis %s" % axisletter))
             return
 
         # get the axisnumber
@@ -179,7 +179,7 @@ class ProbeScreenJog(ProbeScreenBase):
     def on_btn_jog_released(self, widget, data=None):
         axisletter = widget.get_label()[0]
         if not axisletter.lower() in "xyzabcuvw":
-            print("unknown axis %s" % axisletter)
+            print(("unknown axis %s" % axisletter))
             return
 
         axis = "xyzabcuvw".index(axisletter.lower())

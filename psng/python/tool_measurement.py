@@ -17,7 +17,6 @@
 # along with this program; If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import sys
 
 import hal
 import hal_glib
@@ -319,13 +318,13 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
         change = self.halcomp["toolchange-change"]
         toolnumber = self.halcomp["toolchange-number"]
         toolprepnumber = self.halcomp["toolchange-prep-number"]
-        print("tool-number =", toolnumber)
-        print("tool_prep_number =", toolprepnumber, change)
+        print(("tool-number =", toolnumber))
+        print(("tool_prep_number =", toolprepnumber, change))
         if change:
             # if toolprepnumber = 0 we will get an error because we will not be able to get
             # any tooldescription, so we avoid that case
             if toolprepnumber == 0:
-                message = _("Please remove the mounted tool and press OK when done")
+                message = ("Please remove the mounted tool and press OK when done")
             else:
                 tooltable = self.inifile.find("EMCIO", "TOOL_TABLE")
                 if not tooltable:
@@ -337,7 +336,7 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
                 toolfile = os.path.join(CONFIGPATH, tooltable)
                 self.tooledit1.set_filename(toolfile)
                 tooldescr = self.tooledit1.get_toolinfo(toolprepnumber)[16]
-                message = _(
+                message = (
                     "Please change to tool\n\n# {0:d}     {1}\n\n then click OK."
                 ).format(toolprepnumber, tooldescr)
             result = self.warning_dialog(message, title=_("Manual Toolchange"))
@@ -345,11 +344,11 @@ class ProbeScreenToolMeasurement(ProbeScreenBase):
                 self.vcp_reload()
                 self.halcomp["toolchange-changed"] = True
             else:
-                print(
+                print((
                     "toolchange abort",
                     toolnumber,
                     self.halcomp["toolchange-prep-number"],
-                )
+                ))
                 self.command.abort()
                 self.halcomp["toolchange-prep-number"] = toolnumber
                 self.halcomp["toolchange-change"] = False

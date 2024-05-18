@@ -24,9 +24,8 @@ from datetime import datetime
 from functools import wraps
 from subprocess import PIPE, Popen
 
-import gtk
 import linuxcnc
-import pango
+from gi.repository import Pango, Gtk
 
 from .configparser import ProbeScreenConfigParser
 from .util import restore_task_mode
@@ -98,7 +97,12 @@ class ProbeScreenBase(object):
             if "G1 " in l:
                 l += " F#<_ini[TOOLSENSOR]RAPID_SPEED>"
             self.command.mdi(l)
-            self.command.wait_complete()
+            rv = self.command.wait_complete(50)
+            if rv == -1:
+                message = _("command timed out")
+                secondary = _("please check self.command.wait_complete timeout in psng base.py")
+                self.warning_dialog(message, secondary=secondary)
+                return -1
             if self.error_poll() == -1:
                 return -1
         return 0
@@ -124,9 +128,7 @@ class ProbeScreenBase(object):
         if "axis" in self.display:
             # AXIS polls for errors every 0.2 seconds, so we wait slightly longer to make sure it's happened.
             time.sleep(0.25)
-            error_pin = Popen(
-                "halcmd getp probe.user.error ", shell=True, stdout=PIPE
-            ).stdout.read()
+            error_pin = Popen("halcmd getp probe.user.error ", shell=True, stdout=PIPE).stdout.read()
 
         elif "gmoccapy" in self.display:
             # gmoccapy polls for errors every 0.25 seconds, OR whatever value is in the [DISPLAY]CYCLE_TIME ini
@@ -139,13 +141,13 @@ class ProbeScreenBase(object):
             ).stdout.read()
 
         else:
-            print("Unable to poll %s GUI for errors" % self.display)
+            print(("Unable to poll %s GUI for errors" % self.display))
             return -1
 
-        if "TRUE" in error_pin:
+        if b'TRUE' in error_pin:
             text = "See notification popup"
             self.add_history("Error: %s" % text)
-            print("error", text)
+            print(("error", text))
             self.command.mode(linuxcnc.MODE_MANUAL)
             self.command.wait_complete()
             return -1
@@ -161,10 +163,10 @@ class ProbeScreenBase(object):
         # gmoccapy or axis ?
         temp = self.inifile.find("DISPLAY", "DISPLAY")
         if not temp:
-            print(
+            print((
                 "****  PROBE SCREEN GET INI INFO **** \n Error recognition of display type : %s"
                 % temp
-            )
+            ))
         return temp
 
     def get_preference_file_path(self):
@@ -178,7 +180,7 @@ class ProbeScreenBase(object):
             else:
                 machinename = machinename.replace(" ", "_")
                 temp = os.path.join(CONFIGPATH1, "%s.pref" % machinename)
-        print("****  probe_screen GETINIINFO **** \n Preference file path: %s" % temp)
+        print(("****  probe_screen GETINIINFO **** \n Preference file path: %s" % temp))
         return temp
 
     def vcp_reload(self):
@@ -259,12 +261,12 @@ class ProbeScreenBase(object):
         self.buffer.insert(i, "%s \n" % text)
 
     def _dialog(
-        self, gtk_type, gtk_buttons, message, secondary=None, title=_("Probe Screen NG")
+        self, gtk_type, gtk_buttons, message, secondary=None, title=("Probe Screen NG")
     ):
         """ displays a dialog """
-        dialog = gtk.MessageDialog(
+        dialog = Gtk.MessageDialog(
             self.window,
-            gtk.DIALOG_DESTROY_WITH_PARENT,
+            Gtk.DialogFlags.DESTROY_WITH_PARENT,
             gtk_type,
             gtk_buttons,
             message,
@@ -275,19 +277,21 @@ class ProbeScreenBase(object):
         dialog.set_keep_above(True)
         dialog.show_all()
         dialog.set_title(title)
-        responce = dialog.run()
+        response = dialog.run()
         dialog.destroy()
-        return responce == gtk.RESPONSE_OK
+        return response == Gtk.ResponseType.OK
 
     def warning_dialog(self, message, secondary=None, title=_("Probe Screen NG")):
         """ displays a warning dialog """
         return self._dialog(
-            gtk.MESSAGE_WARNING, gtk.BUTTONS_OK, message, secondary, title
+            Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, message, secondary, title
         )
 
     def error_dialog(self, message, secondary=None, title=_("Probe Screen NG")):
         """ displays a warning dialog and exits the probe screen"""
-        self._dialog(gtk.MESSAGE_ERROR, gtk.BUTTONS_CLOSE, message, secondary, title)
+        self._dialog(
+            Gtk.MessageType.ERROR, Gtk.ButtonsType.CLOSE, message, secondary, title
+        )
         sys.exit(1)
 
     def display_result_a(self, value):
@@ -448,25 +452,25 @@ class ProbeScreenBase(object):
     #
     # --------------------------
     def on_common_spbtn_key_press_event(self, pin_name, gtkspinbutton, data=None):
-        keyname = gtk.gdk.keyval_name(data.keyval)
+        keyname = Gtk.gdk.keyval_name(data.keyval)
         if keyname == "Return":
             # Drop the Italics
-            gtkspinbutton.modify_font(pango.FontDescription("normal"))
+            gtkspinbutton.modify_font(Pango.FontDescription("normal"))
         elif keyname == "Escape":
             # Restore the original value
             gtkspinbutton.set_value(self.halcomp[pin_name])
 
             # Drop the Italics
-            gtkspinbutton.modify_font(pango.FontDescription("normal"))
+            gtkspinbutton.modify_font(Pango.FontDescription("normal"))
         else:
             # Set to Italics
-            gtkspinbutton.modify_font(pango.FontDescription("italic"))
+            gtkspinbutton.modify_font(Pango.FontDescription("italic"))
 
     def on_common_spbtn_value_changed(
         self, pin_name, gtkspinbutton, data=None, _type=float
     ):
         # Drop the Italics
-        gtkspinbutton.modify_font(pango.FontDescription("normal"))
+        gtkspinbutton.modify_font(Pango.FontDescription("normal"))
 
         # Update the pin
         self.halcomp[pin_name] = gtkspinbutton.get_value()

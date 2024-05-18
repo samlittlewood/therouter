@@ -1658,7 +1658,7 @@
                             <property name="n_columns">2</property>
                             <property name="row_spacing">4</property>
                             <child>
-                              <object class="GtkCheckButton" id="chk_auto_rotation">
+                              <object class="GtkCheckButton" id="chk_auto_rott">
                                 <property name="label" translatable="yes">Automatic</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>

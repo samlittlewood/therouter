@@ -72,7 +72,7 @@ class ProbeScreenRotation(ProbeScreenBase):
             s += " X%.4f" % x
             s += " Y%.4f" % y
         s += " R%.4f" % self.spbtn_offs_angle.get_value()
-        print("s=", s)
+        print(("s=", s))
         self.gcode(s)
         self.vcp_reload()
         time.sleep(1)

@@ -30,8 +30,8 @@ def get_handlers(halcomp, builder, useropts):
     return [
         ProbeScreenSettings(halcomp, builder, useropts),
 #        ProbeScreenJog(halcomp, builder, useropts),
-#        ProbeScreenZero(halcomp, builder, useropts),
-#        ProbeScreenRotation(halcomp, builder, useropts),
+        ProbeScreenZero(halcomp, builder, useropts),
+        ProbeScreenRotation(halcomp, builder, useropts),
 #        ProbeScreenToolMeasurement(halcomp, builder, useropts),
         ProbeScreenWorkpieceMeasurement(halcomp, builder, useropts),
         ProbeScreenLengthMeasurement(halcomp, builder, useropts),
